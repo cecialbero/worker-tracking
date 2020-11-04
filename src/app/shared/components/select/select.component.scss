@@ -1,0 +1,77 @@
+@import '../../../../styles';
+
+:host {
+    position: relative;
+}
+
+.select {
+    border: 1px solid $border-color;
+    width: 145px;
+    height: 30px;
+    border-radius: 2px;
+    position: relative;
+    line-height: 30px;
+    padding: 0 5px;
+    cursor: pointer;
+
+    i {
+        position: absolute;
+        top: 5px;
+        right: 7px;
+    }
+
+    span {
+        display: flex;
+        align-items: center;
+    }
+}
+ul {
+    display: none;
+    margin: 0;
+    border: 1px solid $border-color;
+    background: #fff;
+    width: 145px;
+    position: absolute;
+    top: 28px;
+    left: 0;
+    padding-left: 0;
+
+    &.open-menu {
+        display: block;
+    }
+
+    li {
+        display: flex;
+        align-items: center;
+        list-style: none;
+        padding: 2px 10px;
+        cursor: pointer;
+
+        &:hover {
+            background:#c7c7ef;
+        }
+    }
+}
+
+.select-option:before {
+    content: "";
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    margin-right: 7px;
+    border: 1px solid $border-color;
+}
+
+.select-active:before {
+    background: $active-color;
+}
+.select-away:before {
+    background: $away-color;
+}
+.select-busy:before {
+    background: $busy-color;
+}
+.select-offline:before {
+    background: $offline-color;
+}

@@ -1,0 +1,32 @@
+@import '../../../styles';
+
+.user-info {
+    background: #fff;
+    border: 1px solid $border-color;
+    margin-bottom: 30px;
+
+    img {
+        border-radius: 50%;
+        width: 62px;
+    }
+
+    span {
+        display: inline-block;
+        vertical-align: middle;
+        color: #fff;
+        background: #f7d776;
+        text-align: center;
+        line-height: 55px;
+        width: 58px;
+        height: 58px;
+        border-radius: 50%;
+        font-weight: 500;
+        font-size: 30px;
+    }
+}
+
+.select {
+    &-active {
+        background: green;
+    }
+}

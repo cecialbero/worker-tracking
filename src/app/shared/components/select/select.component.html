@@ -1,0 +1,9 @@
+<div class="select" (click)="openSelectOptions()">
+    <span class="select-option select-{{selectedOption | lowercase}}">{{selectedOption}}</span>
+    <i class="fas fa-sort-down"></i>
+</div>
+<ul class="select-list">
+    <li *ngFor="let option of optionList"  
+    class="select-option select-{{option | lowercase}}" 
+    (click)="selectOption(option)">{{option}}</li>
+</ul>

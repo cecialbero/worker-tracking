@@ -1,0 +1,25 @@
+<section class="user-info">
+    <table>
+        <thead>
+            <tr>
+                <td>My Info</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <img *ngIf="worker.avatar" src="../../../assets/img/{{worker.avatar}}" alt="Avatar image">
+                    <span *ngIf="!worker.avatar">{{ worker.firstName | initial}}{{worker.lastName | initial}}</span>
+                </td>
+                <td>{{worker.firstName}} {{worker.lastName}}</td>
+                <td>
+                    <app-select [optionList]="status"></app-select>
+                </td>
+                <td>{{worker.role}}</td>
+                <td>{{worker.team.join(', ')}}</td>
+                <td>{{worker.email}}</td>
+                <td>Time</td>
+            </tr>
+        </tbody>
+    </table>
+</section>

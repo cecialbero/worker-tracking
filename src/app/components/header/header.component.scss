@@ -1,0 +1,61 @@
+@import '../../../styles';
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    padding: 15px 40px;
+    border-bottom: 1px solid $border-color;
+
+    h1 {
+        margin: 0;
+    }
+
+    div {
+        position: relative;
+    }
+
+    i[class*="fa-sort-down"] {
+        margin-left: 5px;
+
+        &.rotate {
+            position: absolute;
+            top: 2px;
+
+            &-animation {
+                top: 7px;
+            }
+        }
+    }
+
+    i[class*="fa-user"] {
+        font-size: 20px;
+    }
+
+    ul {
+        display: none;
+        position: absolute;
+        width: 100px;
+        right: 0;
+        text-align: center;
+        padding-left: 0;
+        margin-bottom: 0;
+        border: 1px solid $border-color;
+        background: #fff;
+        padding: 10px;
+        top: 0;
+        transition: top 1s;
+        
+        li {
+            list-style: none;
+        }
+
+        &.open-menu {
+            display: block;
+            top: 40px;
+            right: -5px;
+            transition: top 1s;
+        }
+    }
+}
