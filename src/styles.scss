@@ -1,21 +1,10 @@
 @import 'assets/sass/variables';
 @import 'assets/sass/text';
 @import 'assets/sass/table';
+@import 'assets/sass/utils';
 
 body {
     background: #eee;
     color: $text-color;
     font-size: $text-size;
-}
-
-/*Util classes*/
-.rotate {
-    cursor: pointer;
-    transition: all .3s;
-
-    &-animation {
-        cursor: pointer;
-        transform: rotate(180deg);
-        transition: all .3s;
-    }
 }

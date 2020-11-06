@@ -18,7 +18,12 @@
                 <td>{{worker.role}}</td>
                 <td>{{worker.team.join(', ')}}</td>
                 <td>{{worker.email}}</td>
-                <td>Time</td>
+                <td class="text-center">
+                    <div class="tooltip-box">
+                        <i class="far fa-clock"></i>
+                        <app-tooltip [text]="worker.time"></app-tooltip>
+                    </div>
+                </td>
             </tr>
         </tbody>
     </table>

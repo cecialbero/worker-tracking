@@ -7,13 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserInfoComponent implements OnInit {
 
+  public currentTime = `${new Date().getDay()}/${new Date().getMonth()} - ${new Date().getHours()}:${new Date().getMinutes()}hs`;
+
   worker = {
     firstName: 'Bart',
     lastName: 'Samali',
     avatar: 'avatar.png',
     role: 'Project Manager',
     team: ['Tokio', 'Alaska'],
-    email: 'bart-samali@companyname.com'
+    email: 'bart-samali@companyname.com',
+    time: this.currentTime
   }
 
   status = ['Active', 'Away', 'Offline', 'Busy'];

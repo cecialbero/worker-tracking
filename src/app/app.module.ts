@@ -12,6 +12,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { UserInfoComponent } from './components/user-info/user-info.component';
 import { SelectComponent } from './shared/components/select/select.component';
 import { OtherUsersInfoComponent } from './components/other-users-info/other-users-info.component';
+import { TooltipComponent } from './shared/components/tooltip/tooltip.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { OtherUsersInfoComponent } from './components/other-users-info/other-use
     RotateDirective,
     UserInfoComponent,
     SelectComponent,
-    OtherUsersInfoComponent
+    OtherUsersInfoComponent,
+    TooltipComponent
   ],
   imports: [
     BrowserModule,

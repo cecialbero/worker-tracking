@@ -1,0 +1,45 @@
+@import '../../../../styles';
+
+:host {
+    display: none;
+    position: absolute;
+    top: -48px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 130px;
+    padding: 7px 10px;
+    box-sizing: border-box;
+    @extend .default-box;
+
+    &:after {
+        position: absolute;
+        z-index: 2;
+        bottom: -8px;
+        left: 50%;
+        transform: translateX(-50%);
+        content: "";
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 8px 5px 0 5px;
+        border-color: #ffffff transparent transparent transparent;
+    }
+
+    &:before {
+        position: absolute;
+        bottom: -11px;
+        left: 50%;
+        transform: translateX(-50%);
+        content: "";
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 11px 6px 0 6px;
+        border-color: $border-color transparent transparent transparent;
+    }
+
+    p {
+        margin: 0;
+        text-align: center;
+    }
+}
