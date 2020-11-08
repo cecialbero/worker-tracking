@@ -9,7 +9,7 @@
             <tr>
                 <td>
                     <img *ngIf="worker.avatar" src="../../../assets/img/{{worker.avatar}}" alt="Avatar image">
-                    <span *ngIf="!worker.avatar">{{ worker.firstName | initial}}{{worker.lastName | initial}}</span>
+                    <span class="avatar" *ngIf="!worker.avatar">{{ worker.firstName | initial}}{{worker.lastName | initial}}</span>
                 </td>
                 <td>{{worker.firstName}} {{worker.lastName}}</td>
                 <td>
@@ -17,7 +17,13 @@
                 </td>
                 <td>{{worker.role}}</td>
                 <td>{{worker.team.join(', ')}}</td>
-                <td>{{worker.email}}</td>
+                <td>
+                    <span class="d-none d-sm-block">{{worker.email}}</span>
+                    <div class="tooltip-box d-block d-sm-none">
+                        <i class="far fa-envelope"></i>
+                        <app-tooltip [text]="worker.email"></app-tooltip>
+                    </div>
+                </td>
                 <td class="text-center">
                     <div class="tooltip-box">
                         <i class="far fa-clock"></i>

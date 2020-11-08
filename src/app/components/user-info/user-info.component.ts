@@ -12,7 +12,7 @@ export class UserInfoComponent implements OnInit {
   worker = {
     firstName: 'Bart',
     lastName: 'Samali',
-    avatar: 'avatar.png',
+    avatar: null,
     role: 'Project Manager',
     team: ['Tokio', 'Alaska'],
     email: 'bart-samali@companyname.com',
