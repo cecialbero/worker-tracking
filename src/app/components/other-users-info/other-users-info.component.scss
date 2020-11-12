@@ -1,0 +1,50 @@
+@import '../../../styles';
+
+.other-users-info {
+    @extend .default-box;
+    margin-bottom: 30px;
+    // @media (min-width: $grid-md) {
+    //     width: 100%;
+    //     overflow-x: auto;
+    // }
+
+    img {
+        border-radius: 50%;
+        width: 35px;
+        height: 35px
+    }
+
+    .avatar {
+        display: inline-block;
+        vertical-align: middle;
+        color: #fff;
+        background: #f44336;
+        text-align: center;
+        border-radius: 50%;
+        font-weight: 500;
+        line-height: 34px;
+        width: 35px;
+        height: 35px;
+        font-size: 20px;
+    }
+
+    .fa-clock, .fa-envelope {
+        font-size: 24px;
+    }
+
+    table {
+        @media (min-width: $grid-md) {
+            min-width: 800px;
+        }
+    }
+
+    tr:nth-child(even) {
+        background: #f5f3f3;
+    }
+
+    table tbody {
+        td {
+            padding: 7px;
+        }
+    }
+}

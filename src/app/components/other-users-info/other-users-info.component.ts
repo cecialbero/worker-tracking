@@ -7,6 +7,40 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OtherUsersInfoComponent implements OnInit {
 
+  public currentTime = `${new Date().getDay()}/${new Date().getMonth()} - ${new Date().getHours()}:${new Date().getMinutes()}hs`;
+
+  workers = [
+    {
+      firstName: 'Bart',
+      lastName: 'Samali',
+      avatar: null,
+      role: 'Project Manager',
+      team: ['Tokio', 'Alaska'],
+      email: 'bart-samali@companyname.com',
+      time: this.currentTime
+    },
+    {
+      firstName: 'John',
+      lastName: 'Skyler Moore',
+      avatar: 'avatar.png',
+      role: 'Full-stack Developer',
+      team: ['Tokio'],
+      email: 'j-skylermoore@companyname.com',
+      time: this.currentTime
+    },
+    {
+      firstName: 'Samantha',
+      lastName: 'Lopez Garcia',
+      avatar: null,
+      role: 'Project Manager',
+      team: ['Tokio', 'Alaska', 'Roma'],
+      email: 's-lopezgarcia@companyname.com',
+      time: this.currentTime
+    }
+  ]
+
+  status = ['Active', 'Away', 'Offline', 'Busy'];
+
   constructor() { }
 
   ngOnInit(): void {
