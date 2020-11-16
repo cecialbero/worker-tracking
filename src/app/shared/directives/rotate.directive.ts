@@ -4,7 +4,7 @@ import { Directive, HostListener, ElementRef } from '@angular/core';
   selector: '[rotate]'
 })
 export class RotateDirective {
-  constructor(private elr:ElementRef){
+  constructor(private elr: ElementRef){
     elr.nativeElement.classList.add('rotate');
   }
 
