@@ -22,7 +22,7 @@
                 <td class="text-center">
                     <div class="tooltip-box">
                         <i class="far fa-clock"></i>
-                        <app-tooltip [text]="worker.lastModificationTime"></app-tooltip>
+                        <app-tooltip [text]="worker.lastModificationTime | date :'short'"></app-tooltip>
                     </div>
                 </td>
             </tr>
