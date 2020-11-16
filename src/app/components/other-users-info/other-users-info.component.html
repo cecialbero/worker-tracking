@@ -1,17 +1,17 @@
 <section class="other-users-info">
     <table>
         <tbody>
-            <tr *ngFor="let worker of workers">
+            <tr *ngFor="let worker of otherWorkers">
                 <td>
-                    <img *ngIf="worker.avatar" src="../../../assets/img/{{worker.avatar}}" alt="Avatar image">
-                    <span class="avatar" *ngIf="!worker.avatar">{{ worker.firstName | initial}}{{worker.lastName | initial}}</span>
+                    <img *ngIf="worker.photoUrl" src="{{worker.photoUrl}}" alt="Avatar image">
+                    <span class="avatar" *ngIf="!worker.photoUrl">{{ worker.firstName | initial}}{{worker.lastName | initial}}</span>
                 </td>
                 <td>{{worker.firstName}} {{worker.lastName}}</td>
                 <td>
                     <app-select [optionList]="status"></app-select>
                 </td>
                 <td>{{worker.role}}</td>
-                <td>{{worker.team.join(', ')}}</td>
+                <td>{{getTeamsNames(worker.teams)}}</td>
                 <td>
                     <span class="d-none d-sm-block">{{worker.email}}</span>
                     <div class="tooltip-box d-block d-sm-none">
@@ -22,7 +22,7 @@
                 <td class="text-center">
                     <div class="tooltip-box">
                         <i class="far fa-clock"></i>
-                        <app-tooltip [text]="worker.time"></app-tooltip>
+                        <app-tooltip [text]="worker.lastModificationTime"></app-tooltip>
                     </div>
                 </td>
             </tr>

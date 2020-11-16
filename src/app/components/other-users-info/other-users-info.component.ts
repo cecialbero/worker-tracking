@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Data, OtherUsersInfoResponse } from './models/other-users-info.model';
+import { OtherUsersInfoService } from './other-users-info.service';
 
 @Component({
   selector: 'app-other-users-info',
@@ -8,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
 export class OtherUsersInfoComponent implements OnInit {
 
   public currentTime = `${new Date().getDay()}/${new Date().getMonth()} - ${new Date().getHours()}:${new Date().getMinutes()}hs`;
+  public otherWorkers: Data[];
 
   workers = [
     {
@@ -37,13 +40,24 @@ export class OtherUsersInfoComponent implements OnInit {
       email: 's-lopezgarcia@companyname.com',
       time: this.currentTime
     }
-  ]
+  ];
 
   status = ['Active', 'Away', 'Offline', 'Busy'];
 
-  constructor() { }
+  constructor(
+      public otherUsersInfoService: OtherUsersInfoService
+    ) { }
+
+  public getTeamsNames(teams: any): string {
+    return teams.map(x => x.name);
+  }
 
   ngOnInit(): void {
+    this.otherUsersInfoService.getOtherUsersInfo().subscribe( response => {
+      this.otherWorkers = response.data;
+    },
+    error => {console.log(error);
+    });
   }
 
 }

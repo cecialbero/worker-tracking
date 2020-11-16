@@ -124,6 +124,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "worker-tracking"
+    }
+  },
+  "defaultProject": "worker-tracking",
+  "cli": {
+    "analytics": "0b5d3f66-8749-4d7e-baa6-f909634a6192"
+  }
 }
