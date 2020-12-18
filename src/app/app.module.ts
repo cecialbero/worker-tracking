@@ -8,11 +8,15 @@ import { Initial } from './shared/pipes/initial.pipe';
 //Directives
 import { RotateDirective } from './shared/directives/rotate.directive';
 // Components
-import { HeaderComponent } from './components/header/header.component';
-import { UserInfoComponent } from './components/user-info/user-info.component';
+import { HeaderComponent } from './shared/components/header/header.component';
+import { UserInfoComponent } from './components/dashboard/user-info/user-info.component';
 import { SelectComponent } from './shared/components/select/select.component';
-import { OtherUsersInfoComponent } from './components/other-users-info/other-users-info.component';
+import { OtherUsersInfoComponent } from './components/dashboard//other-users-info/other-users-info.component';
 import { TooltipComponent } from './shared/components/tooltip/tooltip.component';
+import { FirstComponent } from './components/first/first.component';
+import { SecondComponent } from './components/second/second.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { SideNavComponent } from './shared/components/side-nav/side-nav.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +27,11 @@ import { TooltipComponent } from './shared/components/tooltip/tooltip.component'
     UserInfoComponent,
     SelectComponent,
     OtherUsersInfoComponent,
-    TooltipComponent
+    TooltipComponent,
+    FirstComponent,
+    SecondComponent,
+    DashboardComponent,
+    SideNavComponent
   ],
   imports: [
     BrowserModule,

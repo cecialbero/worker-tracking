@@ -4,12 +4,11 @@
             <tr *ngFor="let worker of workers">
                 <td>
                     <img *ngIf="worker.avatar" src="../../../assets/img/{{worker.avatar}}" alt="Avatar image">
-                    <span class="avatar" *ngIf="!worker.avatar">{{ worker.firstName | initial}}{{worker.lastName | initial}}</span>
+                    <span class="avatar"
+                        *ngIf="!worker.avatar">{{ worker.firstName | initial}}{{worker.lastName | initial}}</span>
                 </td>
                 <td>{{worker.firstName}} {{worker.lastName}}</td>
-                <td>
-                    <app-select [optionList]="status"></app-select>
-                </td>
+                <td>{{worker.status}}</td>
                 <td>{{worker.role}}</td>
                 <td>{{worker.team.join(', ')}}</td>
                 <td>

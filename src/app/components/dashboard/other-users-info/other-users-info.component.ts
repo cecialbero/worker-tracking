@@ -16,6 +16,7 @@ export class OtherUsersInfoComponent implements OnInit {
       avatar: null,
       role: 'Project Manager',
       team: ['Tokio', 'Alaska'],
+      status: 'Active',
       email: 'bart-samali@companyname.com',
       time: this.currentTime
     },
@@ -25,6 +26,7 @@ export class OtherUsersInfoComponent implements OnInit {
       avatar: 'avatar.png',
       role: 'Full-stack Developer',
       team: ['Tokio'],
+      status: 'Active',
       email: 'j-skylermoore@companyname.com',
       time: this.currentTime
     },
@@ -34,6 +36,7 @@ export class OtherUsersInfoComponent implements OnInit {
       avatar: null,
       role: 'Project Manager',
       team: ['Tokio', 'Alaska', 'Roma'],
+      status: 'Offline',
       email: 's-lopezgarcia@companyname.com',
       time: this.currentTime
     }
