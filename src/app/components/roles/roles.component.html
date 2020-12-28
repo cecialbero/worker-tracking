@@ -1,0 +1,51 @@
+
+<h1>LISTAR ROLES</h1>
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <!-- <th scope="col">Id</th> -->
+            <th scope="col">Role Name</th>
+            <th scope="col">Abbreviation</th>
+            <th scope="col">Total Workers</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let role of this.rolesResponse; let i = index">
+            <th scope="row">{{i+1}}</th>
+            <!-- <td>{{role.roleId}}</td> -->
+            <td>{{role.roleName}}</td>
+            <td>{{role.abbreviation}}</td>
+            <td>{{role.totalWorkers}}</td>
+        </tr>
+    </tbody>
+</table>
+
+<br>
+<br>
+<br>
+
+<h1>CREAR NUEVO ROL</h1>
+<div class="container">
+    <div class="card.body">
+        <div class= "card.title">
+            <h4>Ingresar un nuevo rol</h4>
+        </div>
+    </div>
+    <div class="form-group">
+        <input type="text"
+        [(ngModel)]="this.role.name"
+        placeholder="Inserte el nombre del nuevo rol" 
+        class="form-control" 
+        required>
+    </div>
+    <div class="form-group">
+        <input type="text"
+        [(ngModel)]="this.role.abbreviation"
+        placeholder="Inserte la abreviatura para ese rol" 
+        class="form-control">
+    </div>
+    <button (click)="createRole()" class="btn btn-primary">
+        Registrar
+    </button>
+</div>

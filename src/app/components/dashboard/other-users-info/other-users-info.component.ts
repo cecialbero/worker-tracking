@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { OtherUsersInfoService } from 'src/app/services/other-users-info.service';
+import { WorkerInfo, OtherUsersInfoResponse } from './models/other-users-info.model';
+import { Status } from 'src/app/shared/models/status.model';
+import { StatusService } from 'src/app/services/status.service';
+import { Team } from 'src/app/shared/models/team.model';
 
 @Component({
   selector: 'app-other-users-info',
@@ -8,45 +13,38 @@ import { Component, OnInit } from '@angular/core';
 export class OtherUsersInfoComponent implements OnInit {
 
   public currentTime = `${new Date().getDay()}/${new Date().getMonth()} - ${new Date().getHours()}:${new Date().getMinutes()}hs`;
-
-  workers = [
-    {
-      firstName: 'Bart',
-      lastName: 'Samali',
-      avatar: null,
-      role: 'Project Manager',
-      team: ['Tokio', 'Alaska'],
-      status: 'Active',
-      email: 'bart-samali@companyname.com',
-      time: this.currentTime
-    },
-    {
-      firstName: 'John',
-      lastName: 'Skyler Moore',
-      avatar: 'avatar.png',
-      role: 'Full-stack Developer',
-      team: ['Tokio'],
-      status: 'Active',
-      email: 'j-skylermoore@companyname.com',
-      time: this.currentTime
-    },
-    {
-      firstName: 'Samantha',
-      lastName: 'Lopez Garcia',
-      avatar: null,
-      role: 'Project Manager',
-      team: ['Tokio', 'Alaska', 'Roma'],
-      status: 'Offline',
-      email: 's-lopezgarcia@companyname.com',
-      time: this.currentTime
-    }
-  ]
+  public otherWorkersInfo: Array<WorkerInfo>;
+  public statusList = new Array<Status>();
 
   status = ['Active', 'Away', 'Offline', 'Busy'];
 
-  constructor() { }
+  constructor(
+    public otherUsersInfoService: OtherUsersInfoService,
+    public statusService: StatusService,
+  ) { }
 
-  ngOnInit(): void {
+  public getTeamsNames(teams: Array<Team>): string {
+    const result = teams.map(x => x.name).join(', ');
+    return result;
   }
 
+  public getAllStatus(): Array<Status> {
+    this.statusService.getAllStatus().subscribe(response => {
+      return response.map(x => x.statusName);
+    },
+    error => {
+      console.log(error);
+    });
+    return this.statusList;
+  }
+
+  ngOnInit(): void {
+    this.otherUsersInfoService.getOtherUsersInfo().subscribe( response => {
+      this.otherWorkersInfo = response.data;
+      console.log(this.otherWorkersInfo);
+    },
+    error => {
+      console.log(error);
+    });
+  }
 }

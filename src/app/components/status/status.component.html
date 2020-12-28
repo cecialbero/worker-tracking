@@ -1,0 +1,42 @@
+<h1>LISTAR ESTADOS</h1>
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <!-- <th scope="col">Id</th> -->
+            <th scope="col">Status Name</th>
+            <th scope="col">Total Workers</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let status of this.statusResponse; let i = index">
+            <th scope="row">{{i+1}}</th>
+            <!-- <td>{{status.statusId}}</td> -->
+            <td>{{status.statusName}}</td>
+            <td>{{status.totalWorkers}}</td>
+        </tr>
+    </tbody>
+</table>
+
+<br>
+<br>
+<br>
+
+<h1>CREAR NUEVO ESTADO</h1>
+<div class="container">
+    <div class="card.body">
+        <div class= "card.title">
+            <h4>Ingresar un nuevo estado</h4>
+        </div>
+    </div>
+    <div class="form-group">
+        <input type="text"
+        [(ngModel)]="this.status.name"
+        placeholder="Inserte el nombre del nuevo estado" 
+        class="form-control"
+        required>
+    </div>
+    <button (click)="createStatus()" class="btn btn-primary">
+        Registrar
+    </button>
+</div>

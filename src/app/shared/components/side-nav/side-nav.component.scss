@@ -3,8 +3,9 @@
 nav {
     background: #fff;
     min-height: 100vh;
-    padding: 50px;
-    width: 250px;
+    padding: 25px;
+    width: 150px;
+    opacity:0.5;
 
     ul {
         padding-left: 0;
@@ -17,10 +18,20 @@ nav {
 
         &:hover {
             color: $link-color;
+            padding: 10px 10px;  
+            overflow: hidden;
+            -webkit-transform: scale(1.2);
+            -ms-transform: scale(1.2);
+            transform: scale(1.2);
         }
 
         &:focus {
             outline: none;
         }
     }
+
+&:hover {
+    opacity:0.9;
+}
+
 }

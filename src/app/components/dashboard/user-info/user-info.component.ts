@@ -17,7 +17,7 @@ export class UserInfoComponent implements OnInit {
     team: ['Tokio', 'Alaska'],
     email: 'bart-samali@companyname.com',
     time: this.currentTime
-  }
+  };
 
   status = ['Active', 'Away', 'Offline', 'Busy'];
 

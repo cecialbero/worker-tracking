@@ -14,12 +14,12 @@ export class SelectComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  openSelectOptions() {
+  openSelectOptions(): void {
     const list = document.querySelector('.select-list');
     list.classList.toggle('open-menu');
   }
 
-  selectOption(option: string) {
+  selectOption(option: string): void {
     this.selectedOption = option;
     const list = document.querySelector('.select-list');
 

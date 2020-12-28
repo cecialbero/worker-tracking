@@ -12,7 +12,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  openUserOptions() {
+  openUserOptions(): void {
     const userOptions = document.querySelector('header ul');
     userOptions.classList.toggle('open-menu');
   }

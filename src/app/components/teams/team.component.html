@@ -1,0 +1,42 @@
+<h1>LISTAR EQUIPOS</h1>
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <!-- <th scope="col">Id</th> -->
+            <th scope="col">Team Name</th>
+            <th scope="col">Total Workers</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let team of this.teamsResponse; let i = index">
+            <th scope="row">{{i+1}}</th>
+            <!-- <td>{{team.teamId}}</td> -->
+            <td>{{team.name}}</td>
+            <td>{{team.totalWorkers}}</td>
+        </tr>
+    </tbody>
+</table>
+
+<br>
+<br>
+<br>
+
+<h1>CREAR NUEVO EQUIPO</h1>
+<div class="container">
+    <div class="card.body">
+        <div class= "card.title">
+            <h4>Ingresar un nuevo equipo</h4>
+        </div>
+    </div>
+    <div class="form-group">
+        <input type="text"
+        [(ngModel)]="this.team.name"
+        placeholder="Inserte el nombre del nuevo equipo" 
+        class="form-control"
+        required>
+    </div>
+    <button (click)="createTeam()" class="btn btn-primary">
+        Registrar
+    </button>
+</div>
