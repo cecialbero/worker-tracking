@@ -1,0 +1,132 @@
+<h1>LISTAR TRABAJADORES</h1>
+
+<app-search-component 
+  (typing)='filter = $event' 
+  (typing)='filterResults(filter)'>
+</app-search-component>
+
+<div class="container">
+  <div class="row">
+    <div class="col-2 form-group">
+      <input type="text" class="form-control" placeholder="TODO: Search by status" [(ngModel)]="filterTerm">
+    </div>
+    <div class="col-2 form-group">
+      <input type="text" class="form-control" placeholder="TODO: Search by role" [(ngModel)]="filterTerm">
+    </div>
+    <div class="col-2 form-group">
+      <input type="text" class="form-control" placeholder="TODO: Search by team" [(ngModel)]="filterTerm">
+    </div>
+    <div class="col-6 form-group">
+      <form class="form-inline ">
+        <input type="search" class="form-control form-control-md w-75" placeholder="Search by name..." name="filter"
+          [(ngModel)]="filter" autofocus>
+        <button class="btn btn-light ml-3 search-button" (click)="filterResults(filter)">
+          <i class="fa fa-search" aria-hidden="true"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-5 mb-5" *ngIf="!this.workersResponse">
+  <h2 class="text-center text-muted"> There is no workers to show :(</h2>
+</div>
+
+<div class="container">
+  <table class="table table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Image</th>
+        <th scope="col">Name</th>
+        <th scope="col">Role</th>
+        <th scope="col">Status</th>
+        <th scope="col">Teams</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let worker of this.workersResponse; let i = index">
+        <th scope="row">{{i+1}}</th>
+        <td>
+          <img *ngIf="worker.photoUrl" src="{{worker.photoUrl}}" alt="Avatar image">
+          <span class="avatar" *ngIf="!worker.photoUrl">{{ worker.firstName | initial}}{{worker.lastName |
+            initial}}</span>
+        </td>
+        <td>{{worker.firstName}} {{worker.lastName}}</td>
+        <td>{{worker.role}}</td>
+        <td>{{worker.status}}</td>
+        <td>{{concatNames(worker.teams)}}</td>
+        <td class="text-center">
+          <div class="tooltip-box">
+            <i class="far fa-envelope"></i>
+            <app-tooltip [text]="worker.email"></app-tooltip>
+          </div>
+        </td>
+        <td class="text-center">
+          <div class="tooltip-box">
+            <i class="far fa-clock"></i>
+            <app-tooltip [text]="worker.lastModificationTime| date :'short'"></app-tooltip>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<app-load-more (click)="loadMore()" [hasMore]='hasMore'></app-load-more>
+
+<br>
+<br>
+<br>
+
+<h3>INGRESAR UN NUEVO TRABAJADOR</h3>
+<div class="container">
+
+  <form>
+    <div class="row">
+      <div class="col-3 form-group">
+        <label for="worker-first-name">First Name:</label>
+        <input id="worker-first-name" class="form-control" placeholder="First Name" type="text">
+      </div>
+      <div class="col-3 form-group">
+        <label for="worker-last-name">Last Name:</label>
+        <input id="worker-last-name" class="form-control" placeholder="Last Name" type="text">
+      </div>
+      <div class="col-6 form-group">
+        <label for="worker-email">Email:</label>
+        <input id="worker-email" class="form-control" placeholder="Email" type="email">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-4 form-group">
+        <label for="worker-birthday">Birthday: </label>
+        <input id="worker-birthday" class="form-control" placeholder="TODO: Datepicker" type="text">
+      </div>
+      <div class="col-4 form-group">
+        <label for="worker-team">Team: </label>
+        <select id="worker-team" class="form-control">
+          <option>Select a team..</option>
+          <option *ngFor="let team of this.teams">{{team.name}}</option>
+        </select>
+      </div>
+      <div class="col-4 form-group">
+        <label for="worker-role">Role: </label>
+        <select id="worker-role" class="form-control">
+          <option>Select a role..</option>
+          <option *ngFor="let role of this.roles">{{role.roleName}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <button class="btn btn-primary">Register worker</button>
+      </div>
+    </div>
+  </form>
+
+</div>
+<br>
+<br>
+<br>

@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   API_URL: 'https://localhost:44351/api/',
-  DEFAULT_PAGE_SIZE: 50
+  DEFAULT_PAGE_SIZE: 10
 };
 
 /*

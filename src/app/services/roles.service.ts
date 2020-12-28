@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -27,5 +27,10 @@ export class RolesService {
   public createRole(role: RoleModel): Observable<string> {
     const body = JSON.stringify(role);
     return this.http.post<string>(API_URL + 'Role/create-role', body, httpOptions);
+  }
+
+  public deleteRole(roleId: string): Observable<string> {
+    const params = new HttpParams().append('roleId', roleId);
+    return this.http.delete<string>(`${API_URL}Role/delete-role?${params}`, httpOptions);
   }
 }

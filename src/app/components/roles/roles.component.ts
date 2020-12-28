@@ -18,11 +18,17 @@ export class RolesComponent implements OnInit {
     public roleService: RolesService,
   ) { }
 
+  deleteRole(id: string): void {
+    this.roleService.deleteRole(id)
+    .subscribe(result => {
+      console.log(result);
+      this.getAll();
+    });
+  }
+
   createRole(): void {
-    console.log(this.role);
     this.roleService.createRole(this.role)
       .subscribe(result => {
-        console.log(result);
         this.getAll();
       });
   }
@@ -31,7 +37,6 @@ export class RolesComponent implements OnInit {
     this.roleService.getAllRoles()
       .subscribe(data => {
         this.rolesResponse = data;
-        console.log(this.rolesResponse);
       });
     return this.rolesResponse;
   }

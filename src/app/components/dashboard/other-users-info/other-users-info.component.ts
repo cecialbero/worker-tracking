@@ -41,7 +41,6 @@ export class OtherUsersInfoComponent implements OnInit {
   ngOnInit(): void {
     this.otherUsersInfoService.getOtherUsersInfo().subscribe( response => {
       this.otherWorkersInfo = response.data;
-      console.log(this.otherWorkersInfo);
     },
     error => {
       console.log(error);

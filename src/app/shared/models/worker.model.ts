@@ -1,14 +1,25 @@
+import { Team } from './team.model';
+
+export interface WorkersResponse {
+    pageSize: number;
+    pageNumber: number;
+    totalResults: number;
+    data: Array<Worker>;
+}
+
 export interface Worker {
-    id: string;
-    firsName: string;
+    workerId: string;
+    firstName: string;
     lastName: string;
     email: string;
     birthday: Date;
     photoUrl: string;
     statusId: number;
-    statusName: string;
+    status: string;
     roleId: number;
-    roleName: string;
+    role: string;
     isActive: boolean;
     lastModificationTime: Date;
+    isBirthdayToday: boolean;
+    teams: Array<Team>;
 }

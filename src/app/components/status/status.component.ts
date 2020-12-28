@@ -17,11 +17,17 @@ export class StatusComponent implements OnInit {
     public statusService: StatusService,
   ) { }
 
+  deleteStatus(id: string): void {
+    this.statusService.deleteStatus(id)
+    .subscribe(result => {
+      console.log(result);
+      this.getAll();
+    });
+  }
+
   createStatus(): void {
-    console.log(this.status);
     this.statusService.createStatus(this.status)
       .subscribe(result => {
-        console.log(result);
         this.getAll();
       });
   }
@@ -30,7 +36,6 @@ export class StatusComponent implements OnInit {
     this.statusService.getAllStatus()
       .subscribe(data => {
         this.statusResponse = data;
-        console.log(this.statusResponse);
       });
     return this.statusResponse;
   }

@@ -18,11 +18,17 @@ export class TeamComponent implements OnInit {
     public teamService: TeamsService,
   ) { }
 
+  deleteTeam(id: string): void {
+    this.teamService.deleteTeam(id)
+    .subscribe(result => {
+      console.log(result);
+      this.getAll();
+    });
+  }
+
   createTeam(): void {
-    console.log(this.team);
     this.teamService.createTeam(this.team)
       .subscribe(result => {
-        console.log(result);
         this.getAll();
       });
   }
@@ -31,7 +37,6 @@ export class TeamComponent implements OnInit {
     this.teamService.getAllTeams()
       .subscribe(data => {
         this.teamsResponse = data;
-        console.log(this.teamsResponse);
       });
     return this.teamsResponse;
   }

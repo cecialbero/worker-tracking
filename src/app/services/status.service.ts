@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 
@@ -29,5 +29,10 @@ export class StatusService {
   public createStatus(status: StatusModel): Observable<string> {
     const body = JSON.stringify(status);
     return this.http.post<string>(API_URL + 'Status/create-status', body, httpOptions);
+  }
+
+  public deleteStatus(statusId: string): Observable<string> {
+    const params = new HttpParams().append('statusId', statusId);
+    return this.http.delete<string>(`${API_URL}Status/delete-status?${params}`, httpOptions);
   }
 }

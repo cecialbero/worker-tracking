@@ -1,0 +1,42 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+img {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+
+.avatar {
+  display: inline-block;
+  vertical-align: middle;
+  color: #fff;
+  background: #f44336;
+  text-align: center;
+  border-radius: 50%;
+  font-weight: 500;
+  line-height: 34px;
+  width: 35px;
+  height: 35px;
+  font-size: 20px;
+}
+
+.search-button {
+  display: block;
+  border: none;
+  color: #fff;
+  background: #c689f8;
+  text-align: center;
+  border-radius: 50%;
+  font-weight: 500;
+  line-height: 20px;
+  width: 40px;
+  height: 40px;
+}
+.search-button:hover {
+  box-shadow: 5px 9px 18px -1px rgba(0, 0, 0, 0.42);
+  -webkit-box-shadow: 5px 9px 18px -1px rgba(0, 0, 0, 0.42);
+  -moz-box-shadow: 5px 9px 18px -1px rgba(0, 0, 0, 0.42);
+}

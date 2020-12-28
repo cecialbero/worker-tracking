@@ -1,30 +1,30 @@
 <section class="other-users-info">
-    <table>
-        <tbody>
-            <tr *ngFor="let worker of otherWorkersInfo">
-                <td>
-                    <img *ngIf="worker.photoUrl" src="{{worker.photoUrl}}" alt="Avatar image">
-                    <span class="avatar"
-                        *ngIf="!worker.photoUrl">{{ worker.firstName | initial}}{{worker.lastName | initial}}</span>
-                </td>
-                <td>{{worker.firstName}} {{worker.lastName}}</td>
-                <td>{{worker.statusName}}</td>
-                <td>{{worker.role}}</td>
-                <td>{{getTeamsNames(worker.teams)}}</td>
-                <td>
-                    <span class="d-none d-sm-block">{{worker.email}}</span>
-                    <div class="tooltip-box d-block d-sm-none">
-                        <i class="far fa-envelope"></i>
-                        <app-tooltip [text]="worker.email"></app-tooltip>
-                    </div>
-                </td>
-                <td class="text-center">
-                    <div class="tooltip-box">
-                        <i class="far fa-clock"></i>
-                        <app-tooltip [text]="worker.lastModificationTime| date :'short'"></app-tooltip>
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+  <table>
+    <tbody>
+      <tr *ngFor="let worker of otherWorkersInfo">
+        <td>
+          <img *ngIf="worker.photoUrl" src="{{worker.photoUrl}}" alt="Avatar image">
+          <span class="avatar" *ngIf="!worker.photoUrl">{{ worker.firstName | initial}}{{worker.lastName |
+            initial}}</span>
+        </td>
+        <td>{{worker.firstName}} {{worker.lastName}}</td>
+        <td>{{worker.statusName}}</td>
+        <td>{{worker.role}}</td>
+        <td>{{getTeamsNames(worker.teams)}}</td>
+        <td>
+          <span class="d-none d-sm-block">{{worker.email}}</span>
+          <div class="tooltip-box d-block d-sm-none">
+            <i class="far fa-envelope"></i>
+            <app-tooltip [text]="worker.email"></app-tooltip>
+          </div>
+        </td>
+        <td class="text-center">
+          <div class="tooltip-box">
+            <i class="far fa-clock"></i>
+            <app-tooltip [text]="worker.lastModificationTime| date :'short'"></app-tooltip>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </section>

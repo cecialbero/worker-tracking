@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 
@@ -28,6 +28,11 @@ export class TeamsService {
   public createTeam(team: TeamModel): Observable<string> {
     const body = JSON.stringify(team);
     return this.http.post<string>(API_URL + 'Team/create-team', body, httpOptions);
+  }
+
+  public deleteTeam(teamId: string): Observable<string> {
+    const params = new HttpParams().append('teamId', teamId);
+    return this.http.delete<string>(`${API_URL}Team/delete-team?${params}`, httpOptions);
   }
 
 }
