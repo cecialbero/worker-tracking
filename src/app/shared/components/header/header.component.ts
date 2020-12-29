@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { UserService } from 'src/app/services/identity/user.service';
+import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +11,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  user$: Observable<User>;
 
-  ngOnInit(): void {
+  constructor(
+    private userService: UserService,
+    private router: Router,
+  ) {
+    this.user$ = userService.getUser();
   }
 
   openUserOptions(): void {
@@ -17,4 +25,11 @@ export class HeaderComponent implements OnInit {
     userOptions.classList.toggle('open-menu');
   }
 
+  logout() {
+    this.userService.logout();
+    this.router.navigate(['']);
+  }
+
+  ngOnInit(): void {
+  }
 }

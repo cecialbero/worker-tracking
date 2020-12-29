@@ -1,0 +1,47 @@
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import { Router } from '@angular/router';
+
+import { AuthService } from 'src/app/services/identity/auth.service';
+
+@Component({
+  selector: 'app-signin',
+  templateUrl: './signin.component.html',
+  styleUrls: ['./signin.component.scss']
+})
+export class SigninComponent implements OnInit {
+
+  loginForm: FormGroup;
+  @ViewChild('userNameInput') userNameInput: ElementRef<HTMLInputElement>;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private router: Router,
+  ) { }
+
+  login(): void {
+    const email = this.loginForm.get('userName').value;
+    const password = this.loginForm.get('password').value;
+    this.authService
+      .login(email, password)
+      .subscribe(
+        response => {
+          console.log(response);
+          this.router.navigateByUrl('/workers');
+        },
+        err => {
+          console.log(err?.error?.errorMessages);
+          this.loginForm.reset();
+          this.userNameInput.nativeElement.focus();
+        });
+  }
+
+  ngOnInit(): void {
+    this.loginForm = this.formBuilder.group({
+      userName: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+  }
+
+}

@@ -1,29 +1,21 @@
 <h1>LISTAR TRABAJADORES</h1>
 
-<app-search-component 
-  (typing)='filter = $event' 
-  (typing)='filterResults(filter)'>
+<app-search-component (typing)='filter = $event' (typing)='filterResults(filter)'>
 </app-search-component>
 
 <div class="container">
   <div class="row">
-    <div class="col-2 form-group">
+    <div class="col-4">
+      <select [(ngModel)]="this.teams" id="worker-team" class="form-control">
+        <option>Select a team..</option>
+        <option *ngFor="let team of this.teams" [ngValue]="team.teamId">{{team.name}}</option>
+      </select>
+    </div>
+    <div class="col-4">
       <input type="text" class="form-control" placeholder="TODO: Search by status" [(ngModel)]="filterTerm">
     </div>
-    <div class="col-2 form-group">
-      <input type="text" class="form-control" placeholder="TODO: Search by role" [(ngModel)]="filterTerm">
-    </div>
-    <div class="col-2 form-group">
-      <input type="text" class="form-control" placeholder="TODO: Search by team" [(ngModel)]="filterTerm">
-    </div>
-    <div class="col-6 form-group">
-      <form class="form-inline ">
-        <input type="search" class="form-control form-control-md w-75" placeholder="Search by name..." name="filter"
-          [(ngModel)]="filter" autofocus>
-        <button class="btn btn-light ml-3 search-button" (click)="filterResults(filter)">
-          <i class="fa fa-search" aria-hidden="true"></i>
-        </button>
-      </form>
+    <div class="col-4">
+      <input type="text" class="form-control" placeholder="TODO: Search by status" [(ngModel)]="filterTerm">
     </div>
   </div>
 </div>
@@ -56,7 +48,7 @@
         </td>
         <td>{{worker.firstName}} {{worker.lastName}}</td>
         <td>{{worker.role}}</td>
-        <td>{{worker.status}}</td>
+        <td><i class="far fa-circle mr-2 current-status"></i>{{worker.status}}</td>
         <td>{{concatNames(worker.teams)}}</td>
         <td class="text-center">
           <div class="tooltip-box">

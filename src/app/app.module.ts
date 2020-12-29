@@ -1,31 +1,36 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule , ReactiveFormsModule} from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CommonModule } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ToastrModule } from 'ngx-toastr';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 // Pipes
 import { Initial } from './shared/pipes/initial.pipe';
 // Directives
 import { RotateDirective } from './shared/directives/rotate.directive';
 // Components
 import { HeaderComponent } from './shared/components/header/header.component';
-import { UserInfoComponent } from './components/dashboard/user-info/user-info.component';
 import { SelectComponent } from './shared/components/select/select.component';
-import { OtherUsersInfoComponent } from './components/dashboard//other-users-info/other-users-info.component';
 import { TooltipComponent } from './shared/components/tooltip/tooltip.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SideNavComponent } from './shared/components/side-nav/side-nav.component';
+import { LoadMoreComponent } from './shared/components/load-more/load-more.component';
+import { SearchComponentComponent } from './shared/components/search-component/search-component.component';
+import { SigninComponent } from './shared/components/home/signin/signin.component';
+import { SignupComponent } from './shared/components/home/signup/signup.component';
+import { HomeComponent } from './shared/components/home/home.component';
 import { OtherUsersInfoService } from './services/other-users-info.service';
+import { UserInfoComponent } from './components/dashboard/user-info/user-info.component';
+import { OtherUsersInfoComponent } from './components/dashboard//other-users-info/other-users-info.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { TeamComponent } from './components/teams/team.component';
 import { RolesComponent } from './components/roles/roles.component';
 import { StatusComponent } from './components/status/status.component';
 import { WorkerComponent } from './components/worker/worker.component';
-import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { LoadMoreComponent } from './shared/components/load-more/load-more.component';
-import { SearchComponentComponent } from './shared/components/search-component/search-component.component';
-import { SigninComponent } from './shared/components/signin/signin.component';
 
 
 @NgModule({
@@ -46,14 +51,27 @@ import { SigninComponent } from './shared/components/signin/signin.component';
     WorkerComponent,
     LoadMoreComponent,
     SearchComponentComponent,
-    SigninComponent
+    SigninComponent,
+    SignupComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    ReactiveFormsModule,
+    CommonModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      progressBar: true,
+      progressAnimation: 'increasing',
+      closeButton: true,
+      newestOnTop: true,
+      preventDuplicates: true,
+    }),
   ],
   providers: [OtherUsersInfoService],
   bootstrap: [AppComponent]

@@ -55,7 +55,6 @@ export class WorkerComponent implements OnInit {
     this.roleService.getAllRoles()
       .subscribe(response => {
         this.roles = response;
-        console.log(this.roles);
       });
     return this.roles;
   }
@@ -89,4 +88,7 @@ export class WorkerComponent implements OnInit {
   }
 
 
+  // print(id: string): void {
+  //   console.log(id);
+  // }
 }
