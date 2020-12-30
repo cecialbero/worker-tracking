@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule , ReactiveFormsModule} from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 
@@ -31,6 +31,7 @@ import { TeamComponent } from './components/teams/team.component';
 import { RolesComponent } from './components/roles/roles.component';
 import { StatusComponent } from './components/status/status.component';
 import { WorkerComponent } from './components/worker/worker.component';
+import { RequestInterceptor } from './services/identity/request.interceptor';
 
 
 @NgModule({
@@ -53,7 +54,7 @@ import { WorkerComponent } from './components/worker/worker.component';
     SearchComponentComponent,
     SigninComponent,
     SignupComponent,
-    HomeComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -73,7 +74,14 @@ import { WorkerComponent } from './components/worker/worker.component';
       preventDuplicates: true,
     }),
   ],
-  providers: [OtherUsersInfoService],
+  providers: [
+    OtherUsersInfoService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RequestInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

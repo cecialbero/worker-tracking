@@ -7,6 +7,8 @@ import { Team } from 'src/app/shared/models/team.model';
 import { TeamsService } from 'src/app/services/teams.service';
 import { Role } from 'src/app/shared/models/role.model';
 import { RolesService } from 'src/app/services/roles.service';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-worker',
@@ -25,9 +27,11 @@ export class WorkerComponent implements OnInit {
   public currentPage = 1;
 
   constructor(
-    public workerService: WorkerService,
-    public teamService: TeamsService,
-    public roleService: RolesService,
+    private router: Router,
+    private toastrService: ToastrService,
+    private workerService: WorkerService,
+    private teamService: TeamsService,
+    private roleService: RolesService,
   ) { }
 
 
@@ -35,6 +39,11 @@ export class WorkerComponent implements OnInit {
     this.workerService.getAllWorkers()
       .subscribe(response => {
         this.workersResponse = response.data;
+      }, err => {
+        if (!err.error.currentTarget.withCredentials) {
+          this.toastrService.warning('😡 Please login 😡');
+          this.router.navigate(['']);
+        }
       });
     return this.workersResponse;
   }
@@ -47,6 +56,10 @@ export class WorkerComponent implements OnInit {
     this.teamService.getAllTeams()
       .subscribe(response => {
         this.teams = response;
+      }, err => {
+        err.error.errorMessages.forEach(
+          (msg: string) => this.toastrService.error(msg)
+        );
       });
     return this.teams;
   }
@@ -55,6 +68,10 @@ export class WorkerComponent implements OnInit {
     this.roleService.getAllRoles()
       .subscribe(response => {
         this.roles = response;
+      }, err => {
+        err.error.errorMessages.forEach(
+          (msg: string) => this.toastrService.error(msg)
+        );
       });
     return this.roles;
   }
@@ -63,6 +80,10 @@ export class WorkerComponent implements OnInit {
     this.workerService.getAllWorkers(filter)
       .subscribe(response => {
         this.workersResponse = response.data;
+      }, err => {
+        err.error.errorMessages.forEach(
+          (msg: string) => this.toastrService.error(msg)
+        );
       });
   }
 
@@ -73,6 +94,10 @@ export class WorkerComponent implements OnInit {
         if (!response.data.length) {
           this.hasMore = false;
         }
+      }, err => {
+        err.error.errorMessages.forEach(
+          (msg: string) => this.toastrService.error(msg)
+        );
       });
   }
 
@@ -87,8 +112,4 @@ export class WorkerComponent implements OnInit {
 
   }
 
-
-  // print(id: string): void {
-  //   console.log(id);
-  // }
 }

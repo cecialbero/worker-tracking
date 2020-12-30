@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 import { AuthService } from 'src/app/services/identity/auth.service';
 
@@ -18,6 +19,7 @@ export class SigninComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router,
+    private toastrService: ToastrService,
   ) { }
 
   login(): void {
@@ -27,11 +29,11 @@ export class SigninComponent implements OnInit {
       .login(email, password)
       .subscribe(
         response => {
-          console.log(response);
+          this.toastrService.success(`Welcome ${email} :)`);
           this.router.navigateByUrl('/workers');
         },
         err => {
-          console.log(err?.error?.errorMessages);
+          err.error.errorMessages.forEach(e => this.toastrService.error(e));
           this.loginForm.reset();
           this.userNameInput.nativeElement.focus();
         });

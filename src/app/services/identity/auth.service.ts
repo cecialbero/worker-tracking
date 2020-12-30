@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { tap } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
@@ -15,6 +16,7 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private userService: UserService,
+    private toastrService: ToastrService,
   ) { }
 
   login(email: string, password: string) {
@@ -26,7 +28,7 @@ export class AuthService {
       .pipe(tap(res => {
         const authToken = res.body['token'];
         this.userService.setToken(authToken);
-        console.log(`User ${email} auth with token =>  ${authToken}`);
+        this.toastrService.info(`Welcome ${email} :)`);
       }));
   }
 }

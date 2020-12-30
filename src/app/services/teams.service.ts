@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/internal/Observable';
 
 import { environment } from 'src/environments/environment';
 import { TeamModel } from '../components/teams/models/team.model';
+import { BaseResponse } from '../shared/models/base-response.model';
 import { Team } from '../shared/models/team.model';
 
 const API_URL = environment.API_URL;
@@ -25,14 +26,14 @@ export class TeamsService {
     return this.http.get<Array<Team>>(`${API_URL}Team/get-all`);
   }
 
-  public createTeam(team: TeamModel): Observable<string> {
+  public createTeam(team: TeamModel): Observable<BaseResponse> {
     const body = JSON.stringify(team);
-    return this.http.post<string>(API_URL + 'Team/create-team', body, httpOptions);
+    return this.http.post<BaseResponse>(API_URL + 'Team/create-team', body, httpOptions);
   }
 
-  public deleteTeam(teamId: string): Observable<string> {
+  public deleteTeam(teamId: string): Observable<BaseResponse> {
     const params = new HttpParams().append('teamId', teamId);
-    return this.http.delete<string>(`${API_URL}Team/delete-team?${params}`, httpOptions);
+    return this.http.delete<BaseResponse>(`${API_URL}Team/delete-team?${params}`, httpOptions);
   }
 
 }

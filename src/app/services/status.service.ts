@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/internal/Observable';
 
 import { environment } from 'src/environments/environment';
 import { StatusModel } from '../components/status/models/status.model';
+import { BaseResponse } from '../shared/models/base-response.model';
 import { Status } from '../shared/models/status.model';
 
 const API_URL = environment.API_URL;
@@ -26,13 +27,13 @@ export class StatusService {
     return this.http.get<Array<Status>>(`${API_URL}Status/get-all`);
   }
 
-  public createStatus(status: StatusModel): Observable<string> {
+  public createStatus(status: StatusModel): Observable<BaseResponse> {
     const body = JSON.stringify(status);
-    return this.http.post<string>(API_URL + 'Status/create-status', body, httpOptions);
+    return this.http.post<BaseResponse>(API_URL + 'Status/create-status', body, httpOptions);
   }
 
-  public deleteStatus(statusId: string): Observable<string> {
+  public deleteStatus(statusId: string): Observable<BaseResponse> {
     const params = new HttpParams().append('statusId', statusId);
-    return this.http.delete<string>(`${API_URL}Status/delete-status?${params}`, httpOptions);
+    return this.http.delete<BaseResponse>(`${API_URL}Status/delete-status?${params}`, httpOptions);
   }
 }
