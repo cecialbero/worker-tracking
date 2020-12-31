@@ -25,7 +25,7 @@ export class HeaderComponent implements OnInit {
     userOptions.classList.toggle('open-menu');
   }
 
-  logout() {
+  logout(): void {
     this.userService.logout();
     this.router.navigate(['']);
   }

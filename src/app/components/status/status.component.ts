@@ -45,14 +45,17 @@ export class StatusComponent implements OnInit {
         }
         this.getAll();
       }, err => {
-        // this.toastrService.error(err.error);
-        const validationName = Object.keys(err.error.errors);
-        const validationMessage = Object.values(err.error.errors);
-        validationName.forEach(errorValitation =>
-          this.toastrService.error(
-            validationMessage.shift().toString(),
-            errorValitation
-          ));
+        if (err.error?.traceId === undefined) {
+          this.toastrService.error(err.error, '🚫Permission🚫');
+        } else {
+          const validationName = Object.keys(err.error.errors);
+          const validationMessage = Object.values(err.error.errors);
+          validationName.forEach(errorValitation =>
+            this.toastrService.error(
+              validationMessage.shift().toString(),
+              errorValitation
+            ));
+        }
       });
   }
 
@@ -61,10 +64,12 @@ export class StatusComponent implements OnInit {
       .subscribe(data => {
         this.statusResponse = data;
       }, err => {
-        if (!err.error.currentTarget.withCredentials) {
-          this.toastrService.warning('😡 Please login 😡');
-          this.router.navigate(['']);
+        if (err.status === 401) {
+          this.toastrService.warning('😡 Please login 😡', '🚫Unauthorized🚫');
+        } else {
+          this.toastrService.warning('400 😥');
         }
+        this.router.navigate(['']);
       });
     return this.statusResponse;
   }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 import * as jwt_decode from 'jwt-decode';
 import { User } from 'src/app/shared/models/user.model';

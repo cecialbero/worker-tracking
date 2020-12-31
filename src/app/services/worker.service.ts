@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
-import { Worker, WorkersResponse } from 'src/app/shared/models/worker.model';
+import { WorkersResponse } from 'src/app/shared/models/worker.model';
 
 const API_URL = environment.API_URL;
 const DEFAULT_PAGE_SIZE = environment.DEFAULT_PAGE_SIZE;
@@ -29,5 +29,9 @@ export class WorkerService {
         .append('pageSize', pageSize !== undefined ? pageSize.toString() : DEFAULT_PAGE_SIZE.toString());
 
       return this.http.get<WorkersResponse>(`${API_URL}Worker/get-all?${params}`);
+    }
+
+    public createWorker(): void {
+      const pepe = 1;
     }
 }

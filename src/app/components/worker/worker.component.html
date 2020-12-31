@@ -74,50 +74,48 @@
 
 <h3>INGRESAR UN NUEVO TRABAJADOR</h3>
 <div class="container">
-
-  <form>
-    <div class="row">
-      <div class="col-3 form-group">
-        <label for="worker-first-name">First Name:</label>
-        <input id="worker-first-name" class="form-control" placeholder="First Name" type="text">
-      </div>
-      <div class="col-3 form-group">
-        <label for="worker-last-name">Last Name:</label>
-        <input id="worker-last-name" class="form-control" placeholder="Last Name" type="text">
+  <form [formGroup]="workerForm" class="row" (submit)="upload()">
+      <div class="col-6 form-group">
+        <label for="first-name">First Name:</label>
+        <input formControlName="first-name" class="form-control" placeholder="First Name" type="text">
       </div>
       <div class="col-6 form-group">
-        <label for="worker-email">Email:</label>
-        <input id="worker-email" class="form-control" placeholder="Email" type="email">
+        <label for="last-name">Last Name:</label>
+        <input formControlName="last-name" class="form-control" placeholder="Last Name" type="text">
       </div>
-    </div>
 
-    <div class="row">
-      <div class="col-4 form-group">
-        <label for="worker-birthday">Birthday: </label>
-        <input id="worker-birthday" class="form-control" placeholder="TODO: Datepicker" type="text">
+      <div class="col-8 form-group">
+        <label for="email">Email:</label>
+        <input formControlName="email" class="form-control" placeholder="Email" type="email">
       </div>
       <div class="col-4 form-group">
-        <label for="worker-team">Team: </label>
-        <select id="worker-team" class="form-control">
+        <label for="birthday">Birthday: </label>
+        <input formControlName="birthday" class="form-control" placeholder="TODO: Datepicker" type="text">
+      </div>
+
+      <div class="col-4 form-group">
+        <label for="team">Team: </label>
+        <select formControlName="team" class="form-control">
           <option>Select a team..</option>
           <option *ngFor="let team of this.teams">{{team.name}}</option>
         </select>
       </div>
       <div class="col-4 form-group">
-        <label for="worker-role">Role: </label>
-        <select id="worker-role" class="form-control">
+        <label for="role">Role: </label>
+        <select formControlName="role" class="form-control">
           <option>Select a role..</option>
           <option *ngFor="let role of this.roles">{{role.roleName}}</option>
         </select>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-12">
-        <button class="btn btn-primary">Register worker</button>
+      <div class="col-4 form-group">
+        <label for="file">Photo: </label>
+        <input formControlName="file" type="file" accept="image/*" (change)="photoFile = $event.target.files[0]">
       </div>
+
+    <div class="text-center">
+      <button class="btn text-center btn-default btn-primary">Register worker</button>
     </div>
   </form>
-
 </div>
 <br>
 <br>

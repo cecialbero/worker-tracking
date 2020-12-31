@@ -1,7 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { WorkerModel } from './models/worker.models';
-import { Worker, WorkersResponse } from 'src/app/shared/models/worker.model';
+import { Worker } from 'src/app/shared/models/worker.model';
 import { WorkerService } from 'src/app/services/worker.service';
 import { Team } from 'src/app/shared/models/team.model';
 import { TeamsService } from 'src/app/services/teams.service';
@@ -9,6 +9,7 @@ import { Role } from 'src/app/shared/models/role.model';
 import { RolesService } from 'src/app/services/roles.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-worker',
@@ -17,6 +18,8 @@ import { Router } from '@angular/router';
 })
 export class WorkerComponent implements OnInit {
 
+  public workerForm: FormGroup;
+  public photoFile: File;
   public worker = new WorkerModel();
   public workersResponse = new Array<Worker>();
   public filterTerm: string;
@@ -28,6 +31,7 @@ export class WorkerComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private formBuilder: FormBuilder,
     private toastrService: ToastrService,
     private workerService: WorkerService,
     private teamService: TeamsService,
@@ -40,10 +44,12 @@ export class WorkerComponent implements OnInit {
       .subscribe(response => {
         this.workersResponse = response.data;
       }, err => {
-        if (!err.error.currentTarget.withCredentials) {
-          this.toastrService.warning('😡 Please login 😡');
-          this.router.navigate(['']);
+        if (err.status === 401) {
+          this.toastrService.warning('😡 Please login 😡', '🚫Unauthorized🚫');
+        } else {
+          this.toastrService.warning('400 😥');
         }
+        this.router.navigate(['']);
       });
     return this.workersResponse;
   }
@@ -109,7 +115,26 @@ export class WorkerComponent implements OnInit {
 
   ngOnInit(): void {
     this.init();
+    this.workerForm = this.formBuilder.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', Validators.required],
+      birthday: ['', Validators.required],
+      file: ['', Validators.required],
+    });
+  }
 
+  upload(): void {
+    const firstName = this.workerForm.get('firstName').value;
+    console.log(`firstName ${firstName}`);
+
+    const lastName = this.workerForm.get('lastName').value;
+    console.log(`lastName ${lastName}`)
+
+    const email = this.workerForm.get('firstName').value;
+    console.log(`email ${email}`)
+
+    console.log(this.photoFile);
   }
 
 }

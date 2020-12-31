@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OtherUsersInfoService } from 'src/app/services/other-users-info.service';
-import { WorkerInfo, OtherUsersInfoResponse } from './models/other-users-info.model';
+import { WorkerInfo } from './models/other-users-info.model';
 import { Status } from 'src/app/shared/models/status.model';
 import { StatusService } from 'src/app/services/status.service';
 import { Team } from 'src/app/shared/models/team.model';
