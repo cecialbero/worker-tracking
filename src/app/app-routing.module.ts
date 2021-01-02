@@ -10,6 +10,8 @@ import { SigninComponent } from './shared/components/home/signin/signin.componen
 import { AuthGuard } from './services/identity/auth.guard';
 import { SignupComponent } from './shared/components/home/signup/signup.component';
 import { HomeComponent } from './shared/components/home/home.component';
+import { RequireAuthGuard } from './services/identity/require-auth.guard';
+import { NotFoundComponent } from './shared/components/not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -33,19 +35,31 @@ const routes: Routes = [
   },
   {
     path: 'workers',
-    component: WorkerComponent
+    component: WorkerComponent,
+    canActivate: [RequireAuthGuard],
   },
   {
     path: 'teams',
-    component: TeamComponent
+    component: TeamComponent,
+    canActivate: [RequireAuthGuard],
   },
   {
     path: 'roles',
-    component: RolesComponent
+    component: RolesComponent,
+    canActivate: [RequireAuthGuard],
   },
   {
     path: 'status',
-    component: StatusComponent
+    component: StatusComponent,
+    canActivate: [RequireAuthGuard],
+  },
+  {
+    path: 'not-found',
+    component: NotFoundComponent
+  },
+  {
+    path: '**',
+    redirectTo: 'not-found',
   },
 ];
 

@@ -1,17 +1,20 @@
 @import '../../../../assets/sass/variables';
 
 nav {
-    background: #fff;
+    background-image: linear-gradient(to right, rgb(17, 21, 64), rgb(24, 21, 64), rgb(30, 21, 64), rgb(37, 22, 64), rgb(43, 22, 64), rgb(50, 22, 64), rgb(56, 22, 63), rgb(63, 22, 63), rgb(69, 22, 63), rgb(76, 23, 63), rgb(82, 23, 63), rgb(89, 23, 63));
+
     min-height: 100vh;
-    padding: 25px;
+    padding: 20px;
     width: 150px;
     opacity:0.5;
 
     ul {
+        padding-top: 20px;
         padding-left: 0;
     }
 
     li {
+        color: white;
         list-style: none;
         padding: 10px 0;
         cursor: pointer;

@@ -4,9 +4,13 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #fff;
+    background-image: linear-gradient(to right, rgb(17, 21, 64), rgb(24, 21, 64), rgb(30, 21, 64), rgb(37, 22, 64), rgb(43, 22, 64), rgb(50, 22, 64), rgb(56, 22, 63), rgb(63, 22, 63), rgb(69, 22, 63), rgb(76, 23, 63), rgb(82, 23, 63), rgb(89, 23, 63));
     padding: 15px 40px;
     border-bottom: 1px solid $border-color;
+    color: white;
+    // position: fixed;
+    // width: 100%;
+    // z-index: 999;
 
     h1 {
         margin: 0;

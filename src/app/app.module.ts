@@ -7,8 +7,11 @@ import { CommonModule } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+// Libs
 import { ToastrModule } from 'ngx-toastr';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 // Pipes
 import { Initial } from './shared/pipes/initial.pipe';
 // Directives
@@ -32,6 +35,7 @@ import { RolesComponent } from './components/roles/roles.component';
 import { StatusComponent } from './components/status/status.component';
 import { WorkerComponent } from './components/worker/worker.component';
 import { RequestInterceptor } from './services/identity/request.interceptor';
+import { NotFoundComponent } from './shared/components/not-found/not-found.component';
 
 
 @NgModule({
@@ -54,7 +58,8 @@ import { RequestInterceptor } from './services/identity/request.interceptor';
     SearchComponentComponent,
     SigninComponent,
     SignupComponent,
-    HomeComponent
+    HomeComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,6 +70,8 @@ import { RequestInterceptor } from './services/identity/request.interceptor';
     ReactiveFormsModule,
     CommonModule,
     BrowserAnimationsModule,
+    BsDatepickerModule.forRoot(),
+    NgMultiSelectDropDownModule.forRoot(),
     ToastrModule.forRoot({
       timeOut: 3000,
       progressBar: true,

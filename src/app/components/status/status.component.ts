@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
+import { TokenService } from 'src/app/services/identity/token.service';
+import { UserService } from 'src/app/services/identity/user.service';
 import { StatusService } from 'src/app/services/status.service';
 import { Status } from 'src/app/shared/models/status.model';
+import { User } from 'src/app/shared/models/user.model';
 import { StatusModel } from './models/status.model';
 
 @Component({
@@ -13,26 +17,33 @@ import { StatusModel } from './models/status.model';
 export class StatusComponent implements OnInit {
 
   public status = new StatusModel();
-  public statusResponse = new Array<Status>();
+  public statusList = new Array<Status>();
+  private user$: Observable<User>;
+  public admin: boolean;
+  private currentUser: string;
 
   constructor(
     private router: Router,
     private toastrService: ToastrService,
     private statusService: StatusService,
+    private tokenService: TokenService,
+    private userService: UserService,
   ) { }
 
-  deleteStatus(id: string): void {
-    this.statusService.deleteStatus(id)
-      .subscribe(result => {
-        if (result.commandResponse === null || result.commandResponse === undefined) {
-          this.toastrService.info(`${result.infoMessage?.message}`);
-        } else {
-          this.toastrService.success(`${result.commandResponse}`);
-        }
-        this.getAll();
-      }, err => {
-        this.toastrService.error(err.error);
-      });
+  deleteStatus(status: Status): void {
+    if (confirm(`Are you sure you want to delete status "${status.statusName}"?`)) {
+      this.statusService.deleteStatus(status.statusId.toString())
+        .subscribe(result => {
+          if (result.commandResponse === null || result.commandResponse === undefined) {
+            this.toastrService.info(`${result.infoMessage?.message}`);
+          } else {
+            this.toastrService.success(`${result.commandResponse}`);
+          }
+          this.getAll();
+        }, err => {
+          this.toastrService.error(err.error);
+        });
+    }
   }
 
   createStatus(): void {
@@ -46,7 +57,7 @@ export class StatusComponent implements OnInit {
         this.getAll();
       }, err => {
         if (err.error?.traceId === undefined) {
-          this.toastrService.error(err.error, '🚫Permission🚫');
+          this.toastrService.error(err.error, '🚫Action denied🚫');
         } else {
           const validationName = Object.keys(err.error.errors);
           const validationMessage = Object.values(err.error.errors);
@@ -62,19 +73,24 @@ export class StatusComponent implements OnInit {
   getAll(): Array<Status> {
     this.statusService.getAllStatus()
       .subscribe(data => {
-        this.statusResponse = data;
+        this.statusList = data;
       }, err => {
-        if (err.status === 401) {
-          this.toastrService.warning('😡 Please login 😡', '🚫Unauthorized🚫');
-        } else {
-          this.toastrService.warning('400 😥');
-        }
+        this.toastrService.warning('400 😥');
         this.router.navigate(['']);
       });
-    return this.statusResponse;
+    return this.statusList;
   }
 
-  ngOnInit(): void {
+  private getCurrentUserInfo(): void {
+    this.user$ = this.userService.getUser();
+    this.user$.subscribe(u => {
+      this.currentUser = u.email;
+      this.admin = 'True' === u.admin;
+    });
+  }
+
+  ngOnInit(): any {
+    this.getCurrentUserInfo();
     this.getAll();
   }
 

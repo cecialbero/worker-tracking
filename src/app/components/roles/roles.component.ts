@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
+import { TokenService } from 'src/app/services/identity/token.service';
+import { UserService } from 'src/app/services/identity/user.service';
 
 import { RolesService } from 'src/app/services/roles.service';
 import { Role } from 'src/app/shared/models/role.model';
+import { User } from 'src/app/shared/models/user.model';
 import { RoleModel } from './models/role.model';
 
 @Component({
@@ -14,26 +18,33 @@ import { RoleModel } from './models/role.model';
 export class RolesComponent implements OnInit {
 
   public role = new RoleModel();
-  public rolesResponse = new Array<Role>();
+  public roleList = new Array<Role>();
+  private user$: Observable<User>;
+  public admin: boolean;
+  private currentUser: string;
 
   constructor(
     private router: Router,
     private toastrService: ToastrService,
     private roleService: RolesService,
+    private tokenService: TokenService,
+    private userService: UserService,
   ) { }
 
-  deleteRole(id: string): void {
-    this.roleService.deleteRole(id)
-      .subscribe(result => {
-        if (result.commandResponse === null || result.commandResponse === undefined) {
-          this.toastrService.info(`${result.infoMessage?.message}`);
-        } else {
-          this.toastrService.success(`${result.commandResponse}`);
-        }
-        this.getAll();
-      }, err => {
-        this.toastrService.error(err.error);
-      });
+  deleteRole(role: Role): void {
+    if (confirm(`Are you sure you want to delete role "${role.roleName}"?`)) {
+      this.roleService.deleteRole(role.roleId.toString())
+        .subscribe(result => {
+          if (result.commandResponse === null || result.commandResponse === undefined) {
+            this.toastrService.info(`${result.infoMessage?.message}`);
+          } else {
+            this.toastrService.success(`${result.commandResponse}`);
+          }
+          this.getAll();
+        }, err => {
+          this.toastrService.error(err.error);
+        });
+    }
   }
 
   createRole(): void {
@@ -47,7 +58,7 @@ export class RolesComponent implements OnInit {
         this.getAll();
       }, err => {
         if (err.error?.traceId === undefined) {
-          this.toastrService.error(err.error, '🚫Permission🚫');
+          this.toastrService.error(err.error, '🚫Action denied🚫');
         } else {
           const validationName = Object.keys(err.error.errors);
           const validationMessage = Object.values(err.error.errors);
@@ -60,22 +71,27 @@ export class RolesComponent implements OnInit {
       });
   }
 
+  private getCurrentUserInfo(): void {
+    this.user$ = this.userService.getUser();
+    this.user$.subscribe(u => {
+      this.currentUser = u.email;
+      this.admin = 'True' === u.admin;
+    });
+  }
+
   getAll(): Array<Role> {
     this.roleService.getAllRoles()
       .subscribe(data => {
-        this.rolesResponse = data;
+        this.roleList = data;
       }, err => {
-        if (err.status === 401) {
-          this.toastrService.warning('😡 Please login 😡', '🚫Unauthorized🚫');
-        } else {
-          this.toastrService.warning('400 😥');
-        }
+        this.toastrService.warning('400 😥');
         this.router.navigate(['']);
       });
-    return this.rolesResponse;
+    return this.roleList;
   }
 
-  ngOnInit(): void {
+  ngOnInit(): any {
+    this.getCurrentUserInfo()
     this.getAll();
   }
 

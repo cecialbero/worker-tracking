@@ -19,6 +19,7 @@ export class AuthService {
     private toastrService: ToastrService,
   ) { }
 
+  // tslint:disable-next-line: typedef
   login(email: string, password: string) {
     return this.http.post(
       `${API_URL}v1/identity/login`,
@@ -26,6 +27,7 @@ export class AuthService {
       { observe: 'response' }
     )
       .pipe(tap(res => {
+        // tslint:disable-next-line: no-string-literal
         const authToken = res.body['token'];
         this.userService.setToken(authToken);
         this.toastrService.info(`Welcome ${email} :)`);

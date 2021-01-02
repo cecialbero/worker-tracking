@@ -4,9 +4,8 @@
 @import 'assets/sass/utils';
 
 body {
-    background: #ffcfd4;  
-    background: -webkit-linear-gradient(to left, #ceeeff, #ffcfd4);  
-    background: linear-gradient(to left, #ceeeff, #ffcfd4); 
+    background-image: linear-gradient(to right, rgb(229, 231, 255), rgb(231, 231, 254), rgb(234, 232, 254), rgb(236, 232, 253), rgb(238, 232, 252), rgb(241, 233, 252), rgb(243, 233, 251), rgb(246, 234, 251), rgb(248, 234, 250), rgb(250, 234, 249), rgb(253, 235, 249), rgb(255, 235, 248));
     color: $text-color;
     font-size: $text-size;
+    font-weight: bold;
 }

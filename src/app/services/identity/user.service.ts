@@ -16,6 +16,7 @@ export class UserService {
   constructor(
     private tokenService: TokenService,
   ) {
+    // tslint:disable-next-line: no-unused-expression
     this.tokenService.hasToken() &&
       this.decodeAndNotify();
   }
@@ -32,7 +33,7 @@ export class UserService {
     this.userSubject.next(user);
   }
 
-  getUser(): Observable<any> {
+  getUser(): Observable<User> {
     return this.userSubject.asObservable();
   }
 

@@ -1,24 +1,36 @@
-<h1>LISTAR ESTADOS</h1>
-<div class="container mt-5 mb-5" *ngIf="!this.statusResponse">
-  <h2 class="text-center text-muted"> There is no status to show :(</h2>
+<div class="container mb-3">
+  <div class="row">
+    <div class="col-11 text-center pt-3">
+      <h1>STATUS</h1>
+    </div>
+    <div class="col-1">
+      <button class="btn btn-success">
+        <i class="fa fa-plus-circle" aria-hidden="true"></i> New
+      </button>
+    </div>
+  </div>
 </div>
+
 <div class="container">
+  <div *ngIf="!this.statusList">
+    <h2 class="text-center text-muted"> There is no status to show :(</h2>
+  </div>
   <table class="table table-striped">
     <thead class="thead-dark">
       <tr>
         <th scope="col">#</th>
-        <th scope="col">Status Name</th>
-        <th scope="col">Total Workers</th>
-        <th scope="col"></th>
+        <th scope="col">Description</th>
+        <th scope="col">Current Workers</th>
+        <th *ngIf="this.admin" scope="col"></th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let status of this.statusResponse; let i = index">
+      <tr *ngFor="let status of this.statusList; let i = index">
         <th scope="row">{{i+1}}</th>
         <td>{{status.statusName}}</td>
         <td>{{status.totalWorkers}}</td>
-        <td>
-          <button class="btn btn-danger" (click)="deleteStatus(status.statusId)"><i class="fa fa-trash"
+        <td *ngIf="this.admin">
+          <button class="btn btn-danger" (click)="deleteStatus(status)"><i class="fa fa-trash"
               aria-hidden="true"></i></button>
         </td>
       </tr>

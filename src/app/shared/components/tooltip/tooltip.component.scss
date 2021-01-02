@@ -3,10 +3,10 @@
 :host {
     display: none;
     position: absolute;
-    top: -40px;
+    top: -50px;
     left: 50%;
     transform: translateX(-50%);
-    min-width: 120px;
+    min-width: 200px;
     padding: 7px 10px;
     box-sizing: border-box;
     @extend .default-box;
